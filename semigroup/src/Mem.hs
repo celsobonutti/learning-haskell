@@ -8,15 +8,20 @@ newtype Mem s a = Mem
   { runMem :: s -> (a, s)
   }
 
-combineMems f g x = (a <> c, d)
-  where
-    (a, b) = g x
-    (c, d) = f b
-
 instance (Semigroup a) => Semigroup (Mem s a) where
-  Mem f <> Mem g = Mem $ combineMems f g
+  Mem f <> Mem g = Mem $ \x ->
+    let (a, b) = f x
+        (c, d) = g b
+     in (a <> c, d)
 
-instance Monoid a => Monoid (Mem s a) where
+instance (Monoid a) => Monoid (Mem s a) where
   mempty = Mem (mempty,)
 
-type Assoc s a = Mem s a -> Mem s a -> Mem s a -> Bool
+instance
+  (CoArbitrary s, Arbitrary a, Arbitrary s) =>
+  Arbitrary (Mem s a)
+  where
+  arbitrary = Mem <$> arbitrary
+
+instance Show (Mem s a) where
+  show _ = "Mem s a"
