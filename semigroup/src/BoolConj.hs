@@ -7,7 +7,10 @@ newtype BoolConj = BoolConj Bool
 
 instance Semigroup BoolConj where
   (BoolConj False) <> _ = BoolConj False
-  _                <> x = x
+  _ <> x = x
+
+instance Monoid BoolConj where
+  mempty = BoolConj True
 
 instance Arbitrary BoolConj where
   arbitrary = BoolConj <$> arbitrary

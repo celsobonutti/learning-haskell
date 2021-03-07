@@ -1,2 +1,13 @@
 cradle:
   stack:
+    - path: "./src"
+      component: "semigroup:lib"
+
+    - path: "./app/Main.hs"
+      component: "semigroup:exe:semigroup-exe"
+
+    - path: "./app/Paths_semigroup.hs"
+      component: "semigroup:exe:semigroup-exe"
+
+    - path: "./test"
+      component: "semigroup:test:semigroup-test"

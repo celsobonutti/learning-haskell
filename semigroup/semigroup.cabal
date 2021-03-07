@@ -1,10 +1,10 @@
 cabal-version: 2.0
 
--- This file has been generated from package.yaml by hpack version 0.33.0.
+-- This file has been generated from package.yaml by hpack version 0.34.2.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a655792387ae437dc82a2b580a2f772a79c902cc5eb944b758bb3643fce4f539
+-- hash: 2d3d0ae13b2eb51757b8414fa10dabf753d3a801cc56ec660d731402c5dd642f
 
 name:           semigroup
 version:        0.1.0.0
@@ -34,6 +34,7 @@ library
       Four
       Identity
       Lib
+      Mem
       Or
       Three
       Trivial
