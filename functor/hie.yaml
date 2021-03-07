@@ -1,0 +1,13 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "functor:lib"
+
+    - path: "./app/Main.hs"
+      component: "functor:exe:functor-exe"
+
+    - path: "./app/Paths_functor.hs"
+      component: "functor:exe:functor-exe"
+
+    - path: "./test"
+      component: "functor:test:functor-test"
