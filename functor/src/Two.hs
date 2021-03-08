@@ -10,5 +10,5 @@ instance Functor (Two a) where
 
 instance (Arbitrary a, Arbitrary b) => Arbitrary (Two a b) where
   arbitrary = do
-    a <- arbitrary 
-    Two a <$> arbitrary    
+    a <- arbitrary
+    Two a <$> arbitrary

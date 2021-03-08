@@ -2,7 +2,7 @@
 
 module Flip where
 
-import Test.QuickCheck
+import Test.QuickCheck ( Arbitrary(arbitrary) )
 
 newtype Flip f a b
   = Flip (f b a)
@@ -14,3 +14,6 @@ newtype L a b
 
 instance Functor (Flip L a) where
   fmap f (Flip (L a)) = Flip $ L (f a)
+
+instance Arbitrary b => Arbitrary (Flip L a b) where
+  arbitrary = Flip . L <$> arbitrary

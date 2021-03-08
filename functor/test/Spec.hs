@@ -76,11 +76,11 @@ prop_sumIdentity = functorIdentity
 prop_sumCompose :: Sum Int Float -> Fun Float String -> Fun String Bool -> Bool
 prop_sumCompose = functorCompose
 
--- prop_wrapIdentity :: Wrap Maybe Int -> Bool
--- prop_wrapIdentity = functorIdentity
+prop_wrapIdentity :: Wrap Maybe Int -> Bool
+prop_wrapIdentity = functorIdentity
 
--- prop_wrapCompose :: Wrap (Either Int) Float -> Fun Float String -> Fun String Bool -> Bool
--- prop_wrapCompose = functorCompose
+prop_wrapCompose :: Wrap (Either Int) Float -> Fun Float String -> Fun String Bool -> Bool
+prop_wrapCompose = functorCompose
 
 prop_quantIdentity :: Quant Int Float -> Bool
 prop_quantIdentity = functorIdentity
@@ -94,6 +94,13 @@ prop_kIdentity = functorIdentity
 prop_kCompose :: K Int Char -> Fun Char String -> Fun String Bool -> Bool
 prop_kCompose = functorCompose
 
+prop_talkToMeIdentity :: String -> TalkToMe Char -> Bool
+prop_talkToMeIdentity x (Read f) = f x == (id <$> f) x
+prop_talkToMeIdentity _ f = functorIdentity f
+
+prop_talkToMeCompose :: String -> TalkToMe Char -> Fun Char String -> Fun String Int -> Bool
+prop_talkToMeCompose x (Read f) (Fun _ g) (Fun _ h) = (h . g <$> f) x == (h <$> (g <$> f)) x
+prop_talkToMeCompose _ f g h = functorCompose f g h
 return []
 
 check = $quickCheckAll

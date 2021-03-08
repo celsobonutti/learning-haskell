@@ -9,3 +9,6 @@ newtype Wrap f a
 
 instance Functor f => Functor (Wrap f) where
   fmap f (Wrap g) = Wrap $ f <$> g
+
+instance Arbitrary (f a) => Arbitrary (Wrap f a) where
+  arbitrary = Wrap <$> arbitrary
