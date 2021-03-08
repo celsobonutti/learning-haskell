@@ -22,83 +22,77 @@ functorCompose :: (Eq (f c), Functor f) => f a -> Fun a b -> Fun b c -> Bool
 functorCompose x (Fun _ f) (Fun _ g) =
   ((g . f) <$> x) == (g <$> (f <$> x))
 
-idIdentity :: Identity String -> Bool
-idIdentity = functorIdentity
+prop_idIdentity :: Identity String -> Bool
+prop_idIdentity = functorIdentity
 
-idCompose :: Identity String -> Fun String Int -> Fun Int Char -> Bool
-idCompose = functorCompose
+prop_idCompose :: Identity String -> Fun String Int -> Fun Int Char -> Bool
+prop_idCompose = functorCompose
 
-pairIdentity :: Identity Int -> Bool
-pairIdentity = functorIdentity
+prop_pairIdentity :: Identity Int -> Bool
+prop_pairIdentity = functorIdentity
 
-pairCompose :: Pair Int -> Fun Int Char -> Fun Char Float -> Bool
-pairCompose = functorCompose
+prop_pairCompose :: Pair Int -> Fun Int Char -> Fun Char Float -> Bool
+prop_pairCompose = functorCompose
 
-twoIdentity :: Two Int Bool -> Bool
-twoIdentity = functorIdentity
+prop_twoIdentity :: Two Int Bool -> Bool
+prop_twoIdentity = functorIdentity
 
-twoCompose :: Two Int Bool -> Fun Bool Char -> Fun Char String -> Bool
-twoCompose = functorCompose
+prop_twoCompose :: Two Int Bool -> Fun Bool Char -> Fun Char String -> Bool
+prop_twoCompose = functorCompose
 
-threeIdentity :: Three Int Bool Char -> Bool
-threeIdentity = functorIdentity
+prop_threeIdentity :: Three Int Bool Char -> Bool
+prop_threeIdentity = functorIdentity
 
-threeCompose :: Three Int Bool Char -> Fun Char String -> Fun String Bool -> Bool
-threeCompose = functorCompose
+prop_threeCompose :: Three Int Bool Char -> Fun Char String -> Fun String Bool -> Bool
+prop_threeCompose = functorCompose
 
-threeIdentity' :: Three' Int Bool -> Bool
-threeIdentity' = functorIdentity
+prop_threeIdentity' :: Three' Int Bool -> Bool
+prop_threeIdentity' = functorIdentity
 
-threeCompose' :: Three' Int Bool -> Fun Bool String -> Fun String Integer -> Bool
-threeCompose' = functorCompose
+prop_threeCompose' :: Three' Int Bool -> Fun Bool String -> Fun String Integer -> Bool
+prop_threeCompose' = functorCompose
 
-fourIdentity :: Four Int Bool Char Float -> Bool
-fourIdentity = functorIdentity
+prop_fourIdentity :: Four Int Bool Char Float -> Bool
+prop_fourIdentity = functorIdentity
 
-fourCompose :: Four Int Bool Char Float -> Fun Float String -> Fun String Bool -> Bool
-fourCompose = functorCompose
+prop_fourCompose :: Four Int Bool Char Float -> Fun Float String -> Fun String Bool -> Bool
+prop_fourCompose = functorCompose
 
-fourIdentity' :: Four' String Bool -> Bool
-fourIdentity' = functorIdentity
+prop_fourIdentity' :: Four' String Bool -> Bool
+prop_fourIdentity' = functorIdentity
 
-fourCompose' :: Four' String Bool -> Fun Bool Float -> Fun Float String -> Bool
-fourCompose' = functorCompose
+prop_fourCompose' :: Four' String Bool -> Fun Bool Float -> Fun Float String -> Bool
+prop_fourCompose' = functorCompose
 
-possiblyIdentity :: Possibly Int -> Bool
-possiblyIdentity = functorIdentity
+prop_possiblyIdentity :: Possibly Int -> Bool
+prop_possiblyIdentity = functorIdentity
 
-possiblyCompose :: Possibly Int -> Fun Int Float -> Fun Float String -> Bool
-possiblyCompose = functorCompose
+prop_possiblyCompose :: Possibly Int -> Fun Int Float -> Fun Float String -> Bool
+prop_possiblyCompose = functorCompose
 
-sumIdentity :: Sum Int Float -> Bool
-sumIdentity = functorIdentity
+prop_sumIdentity :: Sum Int Float -> Bool
+prop_sumIdentity = functorIdentity
 
-sumCompose :: Sum Int Float -> Fun Float String -> Fun String Bool -> Bool
-sumCompose = functorCompose
+prop_sumCompose :: Sum Int Float -> Fun Float String -> Fun String Bool -> Bool
+prop_sumCompose = functorCompose
 
-wrapIdentity :: Wrap Maybe Int -> Bool
-wrapIdentity = functorIdentity
+-- prop_wrapIdentity :: Wrap Maybe Int -> Bool
+-- prop_wrapIdentity = functorIdentity
 
-wrapCompose :: Wrap (Either Int) Float -> Fun Float String -> Fun String Bool -> Bool
-wrapCompose = functorCompose
+-- prop_wrapCompose :: Wrap (Either Int) Float -> Fun Float String -> Fun String Bool -> Bool
+-- prop_wrapCompose = functorCompose
 
-quantIdentity :: Quant Int Float -> Bool
-quantIdentity = functorIdentity
+prop_quantIdentity :: Quant Int Float -> Bool
+prop_quantIdentity = functorIdentity
 
-quantCompose :: Quant Int Float -> Fun Float String -> Fun String Char -> Bool
-quantCompose = functorCompose
+prop_quantCompose :: Quant Int Float -> Fun Float String -> Fun String Char -> Bool
+prop_quantCompose = functorCompose
 
-kIdentity :: K Int Char -> Bool
-kIdentity = functorIdentity
+prop_kIdentity :: K Int Char -> Bool
+prop_kIdentity = functorIdentity
 
-kCompose :: K Int Char -> Fun Char String -> Fun String Bool -> Bool
-kCompose = functorCompose
-
-flipIdentity :: Flip L String Char -> Bool
-flipIdentity = functorIdentity
-
-flipCompose :: Flip L String Char -> Fun Char String -> Fun String Bool -> Bool
-flipCompose = functorCompose
+prop_kCompose :: K Int Char -> Fun Char String -> Fun String Bool -> Bool
+prop_kCompose = functorCompose
 
 return []
 

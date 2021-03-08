@@ -2,6 +2,8 @@
 
 module Flip where
 
+import Test.QuickCheck
+
 newtype Flip f a b
   = Flip (f b a)
   deriving (Eq, Show)
