@@ -31,7 +31,7 @@ generatePrint = do
 instance (Arbitrary a) => Arbitrary (TalkToMe a) where
   arbitrary =
     frequency
-      [ (1, return Halt)
-      , (2, generatePrint)
-      , (2, Read <$> arbitrary)
+      [ (1, return Halt),
+        (2, generatePrint),
+        (2, Read <$> arbitrary)
       ]

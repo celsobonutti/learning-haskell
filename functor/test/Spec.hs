@@ -20,7 +20,7 @@ functorIdentity f = fmap id f == f
 
 functorCompose :: (Eq (f c), Functor f) => f a -> Fun a b -> Fun b c -> Bool
 functorCompose x (Fun _ f) (Fun _ g) =
-  ((g . f) <$> x) == (g <$> (f <$> x))
+  (g . f <$> x) == (g <$> (f <$> x))
 
 prop_idIdentity :: Identity String -> Bool
 prop_idIdentity = functorIdentity
@@ -101,6 +101,7 @@ prop_talkToMeIdentity _ f = functorIdentity f
 prop_talkToMeCompose :: String -> TalkToMe Char -> Fun Char String -> Fun String Int -> Bool
 prop_talkToMeCompose x (Read f) (Fun _ g) (Fun _ h) = (h . g <$> f) x == (h <$> (g <$> f)) x
 prop_talkToMeCompose _ f g h = functorCompose f g h
+
 return []
 
 check = $quickCheckAll

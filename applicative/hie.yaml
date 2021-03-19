@@ -1,0 +1,13 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "applicative:lib"
+
+    - path: "./app/Main.hs"
+      component: "applicative:exe:applicative-exe"
+
+    - path: "./app/Paths_applicative.hs"
+      component: "applicative:exe:applicative-exe"
+
+    - path: "./test"
+      component: "applicative:test:applicative-test"
