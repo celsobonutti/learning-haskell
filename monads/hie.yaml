@@ -1,0 +1,13 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "monads:lib"
+
+    - path: "./app/Main.hs"
+      component: "monads:exe:monads-exe"
+
+    - path: "./app/Paths_monads.hs"
+      component: "monads:exe:monads-exe"
+
+    - path: "./test"
+      component: "monads:test:monads-test"
