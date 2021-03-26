@@ -1,0 +1,13 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "foldable:lib"
+
+    - path: "./app/Main.hs"
+      component: "foldable:exe:foldable-exe"
+
+    - path: "./app/Paths_foldable.hs"
+      component: "foldable:exe:foldable-exe"
+
+    - path: "./test"
+      component: "foldable:test:foldable-test"
