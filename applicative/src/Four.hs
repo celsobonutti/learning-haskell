@@ -25,3 +25,11 @@ instance (Arbitrary a, Arbitrary b) => Arbitrary (Four a b) where
 
 instance (Eq a, Eq b) => EqProp (Four a b) where
   (=-=) = eq
+
+t =
+  [ "memes",
+    "basimga",
+    "xd",
+    "bozzano",
+    "bisnaga"
+  ]

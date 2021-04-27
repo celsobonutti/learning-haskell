@@ -27,3 +27,6 @@ instance (Arbitrary a, Arbitrary b) => Arbitrary (Four' a b) where
     b <- arbitrary
     c <- arbitrary
     Four' a b c <$> arbitrary
+
+test :: Num a => a
+test = 5

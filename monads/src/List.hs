@@ -10,10 +10,12 @@ data List a
   | Cons a (List a)
   deriving (Eq, Show)
 
-append :: List a -> List a -> List a
-append Nil ys = ys
-append (Cons x xs) ys =
-  Cons x $ xs `append` ys
+instance Semigroup (List a) where
+  Nil <> ys = ys
+  (Cons x xs) <> ys = Cons x $ xs <> ys
+
+instance Monoid (List a) where
+  mempty = Nil
 
 instance Functor List where
   fmap = liftM
@@ -23,9 +25,9 @@ instance Applicative List where
   (<*>) = ap
 
 instance Monad List where
-  return a = Cons a Nil
-  Nil >>= _ = Nil
-  (Cons x tail) >>= f = f x `append` (tail >>= f)
+  return a = Cons a mempty
+  Nil >>= _ = mempty
+  (Cons x tail) >>= f = f x <> (tail >>= f)
 
 generateCons :: Arbitrary a => Gen (List a)
 generateCons = do

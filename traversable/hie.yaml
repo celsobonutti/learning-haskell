@@ -1,0 +1,13 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "traversable:lib"
+
+    - path: "./app/Main.hs"
+      component: "traversable:exe:traversable-exe"
+
+    - path: "./app/Paths_traversable.hs"
+      component: "traversable:exe:traversable-exe"
+
+    - path: "./test"
+      component: "traversable:test:traversable-test"
