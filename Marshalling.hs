@@ -6,8 +6,11 @@ module Marshalling where
 import Control.Applicative
 import Data.Aeson
 import Data.ByteString.Lazy (ByteString)
+import Data.Text (Text)
 import qualified Data.Text as T
 import Text.RawString.QQ
+import Data.Scientific (floatingOrInteger)
+import Control.Monad.Fail (fail)
 
 sectionJson :: ByteString
 sectionJson =
@@ -53,3 +56,25 @@ instance FromJSON Color where
     <|> (Yellow <$> v.: "yellow")
   parseJSON _ =
     fail "Expected an object for Color"
+
+data NumberOrString
+  = Numba Integer
+  | Stringy Text
+  deriving (Eq, Show)
+
+instance FromJSON NumberOrString where
+  parseJSON (Number i) =
+    case floatingOrInteger i of
+      (Left _) ->
+        fail "Must be an integral number"
+
+      (Right integer) ->
+        return $ Numba integer
+
+  parseJSON (String s) = return $ Stringy s
+
+  parseJSON _ =
+      fail "NumberOrString must be number or string"
+
+dec :: ByteString -> Maybe NumberOrString
+dec = decode
