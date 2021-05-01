@@ -130,7 +130,3 @@ main = hspec $ do
 
     it "for pre-release" $ do
       parse parser mempty `shouldFailOn` "1.1.0-000"
-
-isLeft :: Either a b -> Bool
-isLeft (Left _) = True
-isLeft _ = False
