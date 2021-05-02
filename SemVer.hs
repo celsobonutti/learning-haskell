@@ -72,7 +72,7 @@ integer = do
   n <- some digitChar
   case n of
     ['0'] -> return 0
-    '0' : _ -> fail "trailing zeroes are not allowed"
+    '0' : _ -> fail "leading zeros are not allowed"
     _ -> return . read $ n
 
 idParser :: Parser String 
