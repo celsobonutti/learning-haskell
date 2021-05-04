@@ -1,0 +1,21 @@
+name:                scottyboy
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/celsobonutti/scottyboy#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Celso Bonutti
+maintainer:          i.am@cel.so
+copyright:           Celso Bonutti
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+extra-source-files:  README.md
+
+executable scottyboy
+  hs-source-dirs:      src
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+                    ,  scotty
