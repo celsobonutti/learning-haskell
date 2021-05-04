@@ -3,15 +3,24 @@
 module Text.Fractions where
 
 import Control.Applicative
+import Data.Attoparsec.Text (parseOnly)
 import Data.Ratio ((%))
+import Data.String (IsString)
 import Text.Trifecta
 
+badFraction :: IsString s => s
 badFraction = "1/0"
+
+alsoBad :: IsString s => s
 alsoBad = "10"
+
+shouldWork :: IsString s => s
 shouldWork = "1/2"
+
+shouldAlsoWork :: IsString s => s
 shouldAlsoWork = "2/1"
 
-parseFraction :: Parser Rational
+parseFraction :: (Monad m, TokenParsing m, MonadFail m) => m Rational
 parseFraction = do
   numerator <- decimal
   char '/'
@@ -43,6 +52,12 @@ parseNumber' = parseString parseNumber mempty
 
 main :: IO ()
 main = do
+  let attoP = parseOnly parseFraction
+  print $ attoP shouldWork
+  print $ attoP shouldAlsoWork
+  print $ attoP alsoBad
+  print $ attoP badFraction
+      
   let parseFraction' =
         parseString parseFraction mempty
   print $ parseFraction' shouldWork
