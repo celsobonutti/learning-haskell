@@ -2,16 +2,22 @@
 
 module Scotty where
 
-import Web.Scotty
+import Control.Monad (liftM)
 import Control.Monad.Trans.Class
-
-import Data.Monoid (mconcat)
+import Control.Monad.Trans.Except
+import Control.Monad.Trans.Reader
+import Control.Monad.Trans.State.Strict hiding (get)
+import Web.Scotty
+import Web.Scotty.Internal.Types (ActionT (..))
 
 main = scotty 3000 $ do
   get "/:word" $ do
     beam <- param "word"
-    lift $ putStrLn "hello"
+    ( ActionT . (ExceptT . liftM Right) . ReaderT . const . (\m -> StateT (\s -> m >>= \a -> return (a, s))))
+      (putStrLn "hello")
     html $
-      mconcat ["<h1>Scotty, ",
-              beam,
-              " me up!</h1>"]
+      mconcat
+        [ "<h1>Scotty, ",
+          beam,
+          " me up!</h1>"
+        ]

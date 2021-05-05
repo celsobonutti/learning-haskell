@@ -3,6 +3,8 @@
 module MonadTransformers where
 
 import Control.Monad
+import Control.Monad.Trans.Class
+import Control.Monad.IO.Class
 
 newtype Identity a = Identity {runIdentity :: a}
   deriving (Eq, Show)
@@ -127,3 +129,29 @@ instance (Monad m) => Monad (StateT s m) where
   (StateT sma) >>= f = StateT $ \s -> do
     (x, st) <- sma s
     runStateT (f x) st
+
+instance MonadTrans MaybeT where 
+  lift = MaybeT . fmap Just
+
+instance MonadTrans (EitherT e) where
+  lift = EitherT . fmap Right
+
+instance MonadTrans (StateT s) where
+  lift = StateT . (\m s -> m >>= \a -> return (a, s))
+
+instance MonadTrans (ReaderT s) where
+  lift = ReaderT . const 
+  
+instance (MonadIO m) => MonadIO (MaybeT m) where
+  liftIO = lift . liftIO
+
+instance (MonadIO m) => MonadIO (ReaderT r m ) where
+  liftIO = ReaderT . (\io _ -> liftIO io) 
+
+instance (MonadIO m) => MonadIO (StateT s m) where
+  liftIO = StateT . (\io s -> liftIO io >>= \m -> return (m, s))
+
+type Reader r = ReaderT r Identity
+
+type First r = ReaderT r Maybe
+type Second r = MaybeT (Reader r)
