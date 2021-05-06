@@ -21,5 +21,3 @@ executable morra
                      , containers
                      , transformers
                      , random
-                     , ansi-terminal
-                     , megaparsec
